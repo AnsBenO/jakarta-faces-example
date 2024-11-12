@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML
+      PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<head>
+
+</head>
+
+<body>
+
+
+      <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:h="http://java.sun.com/jsf/html" template="../layouts/app.xhtml">
+
+            <ui:define name="content">
+                  <h2>Product List</h2>
+                  <h:form>
+                        <!-- DataTable -->
+                        <p:dataTable value="#{productBean.allProducts}" var="product" paginator="true" rows="10"
+                              filteredValue="#{productBean.filteredProducts}" styleClass="primefaces-table"
+                              widgetVar="productsTable" responsiveLayout="scroll">
+
+                              <p:column headerText="ID" filterBy="#{product.id}" filterMatchMode="exact">
+                                    <h:outputText value="#{product.id}" />
+                              </p:column>
+
+                              <p:column headerText="Name" filterBy="#{product.name}" filterMatchMode="contains">
+                                    <h:outputText value="#{product.name}" />
+                              </p:column>
+
+                              <p:column headerText="Price" filterBy="#{product.price}" filterMatchMode="exact">
+                                    <h:outputText value="#{product.price}" />
+                              </p:column>
+
+                              <p:column headerText="Description" filterBy="#{product.description}"
+                                    filterMatchMode="contains">
+                                    <h:outputText value="#{product.description}" />
+                              </p:column>
+
+                              <p:column headerText="Image">
+                                    <h:graphicImage value="/#{product.image}" width="100" height="100" />
+                              </p:column>
+
+                              <p:column headerText="Category" filterBy="#{product.category.name}"
+                                    filterMatchMode="contains">
+                                    <h:outputText value="#{product.category.name}" />
+                                    <f:facet name="filter">
+                                          <p:selectOneMenu onchange="PF('productsTable').filter()"
+                                                styleClass="ui-custom-filter">
+                                                <f:selectItem itemLabel="All" itemValue="#{null}"
+                                                      noSelectionOption="true" />
+                                                <f:selectItems value="#{productBean.categoryStringFilterOptions}" />
+                                          </p:selectOneMenu>
+                                    </f:facet>
+                              </p:column>
+
+
+
+                              <p:column headerText="Quantity" filterBy="#{product.quantity}" filterMatchMode="exact">
+                                    <h:outputText value="#{product.quantity}" />
+                              </p:column>
+
+                        </p:dataTable>
+                  </h:form>
+
+                  <!-- Button to open the modal dialog -->
+                  <h:form>
+                        <p:commandButton value="Add Product" icon="pi pi-plus"
+                              onclick="PF('addProductDialog').show();" />
+
+                  </h:form>
+
+                  <!-- Modal Dialog for Add Product Form -->
+                  <p:dialog showEffect="fade" minimizable="true" maximizable="true" header="Add Product"
+                        widgetVar="addProductDialog" width="500" styleClass="add-product-dialog">
+                        <h:form styleClass="add-product-form" enctype="multipart/form-data">
+
+                              <h:panelGrid columns="2" styleClass="add-product-grid">
+                                    <h:outputLabel for="productName" value="Name:" styleClass="add-product-label" />
+                                    <h:inputText id="productName" value="#{productBean.productToAdd.name}"
+                                          styleClass="add-product-input" />
+
+                                    <h:outputLabel for="productPrice" value="Price:" styleClass="add-product-label" />
+                                    <h:inputText id="productPrice" value="#{productBean.productToAdd.price}"
+                                          styleClass="add-product-input" />
+
+                                    <h:outputLabel for="productDescription" value="Description:"
+                                          styleClass="add-product-label" />
+                                    <h:inputTextarea id="productDescription"
+                                          value="#{productBean.productToAdd.description}"
+                                          styleClass="add-product-input add-product-textarea" />
+
+                                    <h:outputLabel for="productCategory" value="Category:"
+                                          styleClass="add-product-label" />
+                                    <p:selectOneMenu id="productCategory" value="#{productBean.selectedCategoryName}"
+                                          styleClass="add-product-input">
+                                          <f:selectItems value="#{productBean.categoryFilterOptions}" var="category"
+                                                itemValue="#{category.name}" itemLabel="#{category.name}" />
+                                    </p:selectOneMenu>
+
+                                    <h:outputLabel for="file" value="Photo:" />
+                                    <p:fileUpload id="file" value="#{productBean.fileToSave}" mode="simple"
+                                          accept=".jpg,.jpeg,.png" />
+
+                                    <h:outputLabel for="productQuantity" value="Quantity:"
+                                          styleClass="add-product-label" />
+                                    <h:inputText id="productQuantity" value="#{productBean.productToAdd.quantity}"
+                                          styleClass="add-product-input" />
+
+
+                              </h:panelGrid>
+
+                              <p:commandButton value="Save" action="#{productBean.saveProduct}"
+                                    oncomplete="PF('addProductDialog').hide();" ajax="flase"
+                                    styleClass="add-product-button" />
+
+
+                        </h:form>
+                  </p:dialog>
+            </ui:define>
+
+      </ui:composition>
+
+</body>
+
+</html>

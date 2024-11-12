@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML
+      PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" template="./layouts/app.xhtml">
+
+      <ui:define name="homeLink">
+            <h:link value="Home" outcome="/home.jsf" />
+      </ui:define>
+
+      <ui:define name="content">
+            <h1>Welcome to the JSF demo</h1>
+            <p>
+                  This is a simple JSF demo application to demonstrate the
+                  functionality of the JSF framework.
+            </p>
+      </ui:define>
+
+</ui:composition>
+
+</html>

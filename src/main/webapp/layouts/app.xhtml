@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML
+	PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" lang="en">
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<h:outputStylesheet name="/css/output.css" library="css" />
+			<h:outputStylesheet library="css" name="font-awesome.css" />
+			<title>
+				<ui:insert name="title">eCom JSF</ui:insert>
+			</title>
+		</f:facet>
+	</h:head>
+	<h:body>
+		<pe:layout> fullPage="true">
+			<pe:layoutPane position="north" size="85" resizable="true" closable="true" collapsible="true">
+				<p:panelGrid>
+					<h:form>
+						<p:column style="width:40%">
+							<h:link outcome="/home.jsf">
+								Home
+							</h:link>
+						</p:column>
+					</h:form>
+					<p:column>
+						<h:form>
+
+						</h:form>
+					</p:column>
+				</p:panelGrid>
+			</pe:layoutPane>
+
+			<pe:layoutPane position="south" size="50" closable="true" collapsible="true">
+				Footer : CopyRight
+				<h:graphicImage name="img/logo.png" height="50" />
+			</pe:layoutPane>
+
+			<pe:layoutPane position="west" size="200" header="e-commerce jsf" collapsible="true">
+				<h:form>
+					<ui:insert name="homeLink"></ui:insert>
+				</h:form>
+				<p:menu toggleable="true">
+					<p:submenu label="Catalogue" icon="ui-icon-wrench" styleClass="ui-submenu">
+						<p:menuitem value="Categories"
+							url="#{request.contextPath}/categories/categories.jsf"
+							icon="ui-icon-script" />
+						<p:menuitem value="Products" url="#{request.contextPath}/products/products.jsf"
+							icon="ui-icon-clipboard" />
+					</p:submenu>
+				</p:menu>
+			</pe:layoutPane>
+			<pe:layoutPane position="center" resizable="true" size="1200" minSize="800" maxSize="1400">
+				<ui:insert name="content">
+					Main content<br />
+				</ui:insert>
+			</pe:layoutPane>
+		</pe:layout>
+	</h:body>
+</f:view>
+
+</html>

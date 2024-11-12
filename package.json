@@ -1,0 +1,21 @@
+{
+	"name": "ecom-jsf",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"start": "npx tailwindcss -i ./src/main/webapp/css/styles.css -o ./src/main/webapp/css/output.css --watch",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"autoprefixer": "^10.4.20",
+		"postcss": "^8.4.47",
+		"tailwindcss": "^3.4.14"
+	},
+	"dependencies": {
+		"ecom-jsf": "file:"
+	}
+}
